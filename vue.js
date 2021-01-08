@@ -5,6 +5,7 @@
 const App = {
   data() {
     return {
+      main_title: 'План по изучению Vue.js',
       activeIndex: 0, // то, что позволяет определить текущий активный шаг
       steps: [
         {title: 'Основы', text: 'В блоке вы познакомитесь со всеми основами Vue.js на практике. На протяжении блока мы напишем реактивное приложение, в процессе разработки которого разберем вся базу фреймворка.'},
@@ -18,15 +19,21 @@ const App = {
   methods: {
     prev() {
       // когда нажимаем кнопку назад
+        this.activeIndex --
     },
     reset() {
       // начать заново
+      this.activeIndex = 0
+
     },
     nextOfFinish() {
       // кнопка вперед или закончить
+        this.activeIndex ++
     },
     setActive(idx) {
       // когда нажимаем на определенный шаг
+      this.steps[idx].text
+      // console.log(this.steps[idx].text)
     }
   },
   computed: {
