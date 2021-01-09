@@ -19,16 +19,21 @@ const App = {
   methods: {
     prev() {
       // когда нажимаем кнопку назад
-        this.activeIndex --
+        // this.activeIndex--
+        console.log('Decreasing by 1..', this.activeIndex--)
     },
     reset() {
       // начать заново
-      this.activeIndex = 0
+      // this.activeIndex = 0
+      console.log('Restarting from main point: 0..', this.activeIndex=0)
+      // console.log(this.steps.length)
 
     },
     nextOfFinish() {
       // кнопка вперед или закончить
-        this.activeIndex ++
+        // this.activeIndex++
+        console.log('Increasing by 1..', this.activeIndex++)
+
     },
     setActive(idx) {
       // когда нажимаем на определенный шаг

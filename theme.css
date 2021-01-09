@@ -72,6 +72,13 @@ h3 {
   color: #e53935;
 }
 
+.disabled {
+  background: #eee!important;
+  border: #ddd!important;
+  color: #aaa!important;
+  cursor: not-allowed;
+}
+
 .btn {
   color: #42b983;
   position: relative;
