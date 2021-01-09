@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Основы Vue</title>
     <link rel="stylesheet" href="theme.css" />
+    <!-- <i>With main script vue in here we don't need 'v-cloak'.. It's works with id="app" from anywhere.. No?</i> -->
     <script src="https://unpkg.com/vue@next"></script>
   </head>
   <body>
@@ -18,43 +19,54 @@
 
           <!-- Сюда необходимо вывести текст активного шага по его индексу -->
 
-          <div v-if="activeIndex===0">
-            <p>{{ steps[activeIndex].text }}</p>
-          </div>
-          <div v-else-if="activeIndex===1">
-            <p>{{ steps[activeIndex].text }}</p>
-          </div>
-          <div v-else-if="activeIndex===2">
-            <p>{{ steps[activeIndex].text }}</p>
-          </div>
-          <div v-else-if="activeIndex===3">
-            <p>{{ steps[activeIndex].text }}</p>
-          </div>
-          <div v-else-if="activeIndex===4">
-            <p>{{ steps[activeIndex].text }}</p>
-          </div>
-          <div v-else-if="activeIndex > 4">
-            <p>{{ reset() }}</p>
-          </div>
-          <div v-else="activeIndex < 0">
-            <p>{{ steps[activeIndex=4].text }}</p>
+          <div v-for="(step, indx) of steps">
+            <p v-if="indx===activeIndex">
+              <!-- <strong>{{step.title}} >></strong> -->
+              <!-- <br> -->
+              {{step.text}}
+            </p>
+            <p v-else-if="activeIndex > 4">
+              {{steps[activeIndex=4].text}}
+            </p>
+            <p v-else-if="activeIndex < 0">
+              {{steps[activeIndex=0].text}}
+            </p>
           </div>
             <hr>
         </div>
 
         <ul class="steps-list">
-          <li class="steps-item active" @click="setActive(activeIndex=0)"><span>1</span>  {{ steps[0].title }}</li>
-          <li class="steps-item active" @click="setActive(activeIndex=1)"><span>2</span>  {{ steps[1].title }}</li>
-          <li class="steps-item active" @click="setActive(activeIndex=2)"><span>3</span>   {{ steps[2].title }}</li>
-          <li class="steps-item" @click="setActive(activeIndex=3)"><span>4</span>        {{ steps[3].title }}</li>
-          <li class="steps-item" @click="setActive(activeIndex=4)"><span>5</span>        {{ steps[4].title }}</li>
+          <li class="steps-item" @click="setActive(activeIndex=0)" :class="{
+            'steps-item active': activeIndex >= 0
+        }"><span>1</span>  {{ steps[0].title }}</li>
+          <li class="steps-item" @click="setActive(activeIndex=1)" :class="{
+            'steps-item active': activeIndex >= 1
+        }"><span>2</span>  {{ steps[1].title }}</li>
+          <li class="steps-item" @click="setActive(activeIndex=2)" :class="{
+            'steps-item active': activeIndex >= 2
+        }"><span>3</span>   {{ steps[2].title }}</li>
+          <li class="steps-item" @click="setActive(activeIndex=3)" :class="{
+            'steps-item active': activeIndex >= 3
+        }"><span>4</span>        {{ steps[3].title }}</li>
+          <li class="steps-item" @click="setActive(activeIndex=4)" :class="{
+            'steps-item active': activeIndex >= 4
+        }"><span>5</span>        {{ steps[4].title }}</li>
         </ul>
 
         <div>
             <hr>
-          <button class="btn" @click="prev">⬅️ Назад</button>
-          <button class="btn danger" @click="reset">Рестарт 🔘</button>
-          <button class="btn primary" @click="nextOfFinish">Вперед ➡️</button>
+          <div v-if="activeIndex >= 4">
+            <button class="btn" @click="prev">⬅️ Назад..</button>
+            <button class="btn danger" @click="reset">Закончить\Заново.. 🔘</button>
+          </div>
+          <div v-else-if="activeIndex <= 0">
+            <button class="btn disabled" @click="isReset">Неактивна.. 🔘</button>
+            <button class="btn primary" @click="nextOfFinish">Вперед.. ➡️</button>
+          </div>
+          <div v-else>
+            <button class="btn" @click="prev">⬅️ Назад..</button>
+            <button class="btn primary" @click="nextOfFinish">Вперед.. ➡️</button>
+          </div>
         </div>
       </div>
     </div>

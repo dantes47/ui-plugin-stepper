@@ -17,6 +17,9 @@ const App = {
     }
   },
   methods: {
+    startAgain() {
+      this.activeIndex
+    },
     prev() {
       // когда нажимаем кнопку назад
         // this.activeIndex--
@@ -44,8 +47,25 @@ const App = {
   computed: {
     // тут стоит определить несколько свойств:
     // 1. текущий выбранный шаг
+
+    // >> can't do this - I have an error: "Uncaught TypeError: can't convert idx to string.. Converting NOT helping..( Request for your advise.."
+
+    // currentStep(idx) {
+    //   return console.log(this.steps[idx].text)
+    // },
+
     // 2. выключена ли кнопка назад
+    isReset() {
+      return console.log('Restarting from main point: 0..', this.activeIndex=0)
+    },
+
     // 3. находимся ли мы на последнем шаге
+
+    // ..no need in this case
+
+    // isFinish() {
+    //   return console.log('Restarting from main point: 0..', this.activeIndex=0)
+    // }
   }
 }
 
